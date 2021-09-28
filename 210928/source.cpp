@@ -3,48 +3,72 @@
 
 using namespace std;
 
-void Input();
-void Process();
-void Render();
+char Input(); //사용자의 입력을 받는다.  Input
+void Process(char Key); //물체를 배치한다.(가상공간에서) Process
+void Render(); //그림을 그린다.(가상 공간에서 사진 찍기) Render
 
-//0이외 켜짐
-//0 종료
-//1 초기화
-//2 입력 중
-//3 
+//개발자가 구현하는 Process
+void CustomProcess(char Key);
+//개발자가 구현하는 Render
+void CustomRender();
+
 
 bool bGameState = true;
 
-char Key;
+int Gold = 0;
 
 int main()
 {
 	//Game Engine
 	while (bGameState)
 	{
-		Input();
-		Process();
+		char Key = Input();
+		Process(Key);
 		Render();
 	}
 
 	return 0;
 }
 
-void Input()
+char Input()
 {
+	//단순 콘솔 입력
+	//조이스택, 패드
+	//터치패드, 마우스
+	char Key;
 
 	cin >> Key;
 
+	cout << Key << endl; //log
+
+	return Key;
 }
-void Process()
+void Process(char Key)
 {
 	if (Key == 'q' || Key == 'Q')
 	{
 		bGameState = false;
 	}
+	
 }
+
 void Render()
 {
 	system("cls"); //콘솔창 clear
+	
 	cout << "그린다." << endl;
+}
+
+
+void CustomProcess(char Key)
+{
+	if (Key == 'G' || Key == 'g')
+	{
+		Gold++;
+	}
+}
+
+void CustomRender()
+{
+	cout << "Gold : " << Gold << endl;
 }
