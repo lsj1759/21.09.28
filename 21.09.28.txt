@@ -1,0 +1,143 @@
+게임 엔진
+
+무한히 한다.
+
+1. 유저 입력을 받는다. 
+2. 로직을 처리한다.
+  2-1. 개발자가 처리 할 수 있도록 만들어 준다.
+3. 화면에 그린다.
+  3-1. 개발자 그림 그릴수 있도록 해준다.
+
+3x3
+
+1 2 3 4 5 6 7 8 9
+int binggo[9]
+
+1.빙고판을 숫자를 순서대로 넣는다 Initializebinggo()
+2. 빙고판에 숫자를 섞는다. ShuffleBinggo();
+
+1 2 3 4 5 6 7 8 9
+
+1. 초기화 하기
+  1.1 빙고판 초기화
+2 유저 입력 받기
+
+3 처리한다.
+   3.1 사용자 처리를 한다
+      3.1.1 빙고 처리를 한다.
+         3.1.1.1 빙고판에서 유저가 입력한 숫자를 찾는다.
+         3.1.1.2 빙고가 있는지 확인한ㄷ
+         3	
+4 그리기
+   4.1 사용자 그리기를 한다
+       4.1.1. 빙고판 그리기
+5 종료
+
+
+#include <iostream>
+#include <windows.h> //windows 헤더파일 include
+#include <cstdlib> // rand 
+#include <ctime>
+using namespace std;
+
+char Input();
+bool Process(char Key);
+void Draw();
+
+void Initialize();
+void Terminate();
+
+void CustomInitialize();
+void CustomTerminate();
+
+void InitializerBingoMap();
+
+int BingoMap[9];
+
+int main()
+{
+	bool bGameState = true;
+	Initialize(); // 게임 엔진 자체를 초기화
+
+	while (bGameState)
+	{
+		char Key = Input();
+		bGameState = Process(Key);
+		Draw();
+	}
+	
+	Terminate();
+
+	return 0;
+}
+
+char Input()
+{
+	char Key;
+
+	cin >> Key;
+
+	return Key;
+}
+
+
+bool Process(char Key)
+{
+	if (Key == 'q' || Key == 'Q')
+	{
+		 return false;
+	}
+
+	return 0;
+
+}
+
+void Draw()
+{
+	// system("cls");
+
+}
+
+void Initialize()
+{
+	//초기화
+	CustomInitialize();
+}
+
+void Terminate()
+{
+	CustomTerminate();
+	//종료
+}
+
+void CustomInitialize()
+{
+	InitializerBingoMap();
+}
+
+void CustomTerminate()
+{
+}
+
+void InitializerBingoMap()
+{
+	for (int i = 0; i < 9; ++i)
+	{
+		BingoMap[i] = i + 1;
+	}
+	
+	srand(static_cast<unsigned int>(time(nullptr)));
+	
+	
+	//shuffle
+	for (int i = 0; i < 100; i++)
+	{
+		//rand
+		int Index1 = rand() % 9;
+		int Index2 = rand() % 9;
+	
+		int Temp = BingoMap[Index1];
+		BingoMap[Index1] = BingoMap[Index2];
+		BingoMap[Index2] = Temp;
+	}
+}
