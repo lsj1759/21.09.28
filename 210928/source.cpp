@@ -12,7 +12,6 @@ void CustomProcess(char Key);
 //개발자가 구현하는 Render
 void CustomRender();
 
-
 bool bGameState = true;
 
 int Gold = 0;
@@ -24,6 +23,7 @@ int main()
 	{
 		char Key = Input();
 		Process(Key);
+		CustomProcess(Key);
 		Render();
 	}
 
@@ -39,12 +39,13 @@ char Input()
 
 	cin >> Key;
 
-	cout << Key << endl; //log
-
 	return Key;
 }
+
 void Process(char Key)
 {
+	cout << Key << endl; //log
+
 	if (Key == 'q' || Key == 'Q')
 	{
 		bGameState = false;
@@ -57,6 +58,8 @@ void Render()
 	system("cls"); //콘솔창 clear
 	
 	cout << "그린다." << endl;
+	
+	CustomRender();
 }
 
 
@@ -66,6 +69,7 @@ void CustomProcess(char Key)
 	{
 		Gold++;
 	}
+
 }
 
 void CustomRender()
